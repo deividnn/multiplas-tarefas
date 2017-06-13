@@ -53,7 +53,7 @@ public class AppContext implements ServletContextListener {
         logtarefa.add(sd.format(
                 Calendar.getInstance().getTime())
                 + ":" + msg);
-        Collections.sort(logtarefa, Collections.reverseOrder());
+     
 
     }
 

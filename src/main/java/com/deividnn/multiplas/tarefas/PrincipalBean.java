@@ -70,6 +70,7 @@ public class PrincipalBean implements Serializable {
         for (String s : AppContext.logtarefa) {
             logtarefas.add(s);
         }
+           Collections.sort(logtarefas, Collections.reverseOrder());
     }
 
     //grava log das acoes
