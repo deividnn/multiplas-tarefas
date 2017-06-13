@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tarefas</title>
+    </h:head>
+    <h:body>
+
+        <h:form id="form">
+            <p:focus context="@form"/>
+            <p:messages closable="true"/>
+
+            <p:panel header="Cadastro de Tarefas" toggleable="true">
+
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel value="Nome Tarefa" for="n"/>
+                    <p:inputText value="#{principalBean.tarefa.nome}"
+                                 required="true"
+                                 id="n"
+                                 size="50"/>
+
+                    <p:outputLabel value="Comando CRON" for="c"/>
+                    <p:inputText value="#{principalBean.tarefa.rotina}"
+                                 required="true"
+                                 size="50"
+                                 placeholder="use o site http://www.cronmaker.com/"
+                                 id="c"
+                                 >
+
+                    </p:inputText>
+
+                    <p:outputLabel value="Metodos"/>
+                    <p:selectOneMenu required="true"
+                                     value="#{principalBean.tarefa.metodo}">
+                        <f:selectItems value="#{principalBean.metodos.entrySet()}" var="m"
+                                       itemLabel="#{m.value}" itemValue="#{m.value}"/>
+
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Salvar"
+                                     update="@form" 
+                                     actionListener="#{principalBean.cadastrarTarefa()}"/>
+
+                </p:panelGrid>
+
+            </p:panel>
+
+            <p:panel header="Tarefas" toggleable="true">
+
+                <p:dataTable value="#{principalBean.tarefas}" var="t"
+                             emptyMessage="nenhuma tarefa"
+                             resizableColumns="true"
+                             draggableColumns="true"
+                             reflow="true"
+                             scrollable="true"
+                             scrollHeight="200"
+                             multiViewState="true">
+                    <p:column sortBy="#{t.id}" headerText="Codigo">
+                        <h:outputText value="#{t.id}"/>
+                    </p:column>
+                    <p:column sortBy="#{t.nome}" headerText="Tarefa">
+                        <h:outputText value="#{t.nome}"/>
+                    </p:column>
+                    <p:column sortBy="#{t.metodo}" headerText="Metodo">
+                        <h:outputText value="#{t.metodo}"/>
+                    </p:column>
+                    <p:column sortBy="#{t.rotina}" headerText="Rotina">
+                        <h:outputText value="#{t.rotina}"/>
+                    </p:column>
+                    <p:column sortBy="#{t.status}" headerText="Status">
+                        <h:outputText value="#{t.status}"/>
+                    </p:column>
+                    <p:column>                        
+                        <p:commandButton value="Excluir"
+                                         update="@form" 
+                                         immediate="true"
+                                         actionListener="#{principalBean.excluirTarefa(t)}"/>
+                    </p:column>
+                    <p:column>  
+                        <p:commandButton value="Pausar"
+                                         update="@form" 
+                                         immediate="true"
+                                         actionListener="#{principalBean.pausaTarefa(t)}"/>
+                    </p:column>  
+                    <p:column>  
+                        <p:commandButton value="Iniciar"
+                                         update="@form" 
+                                         immediate="true"
+                                         actionListener="#{principalBean.iniciarTarefa(t)}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Iniciar Todos"
+                                 update="@form" 
+                                 immediate="true"
+                                 actionListener="#{principalBean.iniciarTodasTarefa()}"/>
+
+                <p:commandButton value="Pausar Todos"
+                                 update="@form" 
+                                 immediate="true"
+                                 actionListener="#{principalBean.pausaTodasTarefa()}"/>
+
+
+
+            </p:panel>
+
+
+            <p:panel header="Logs" toggleable="true">
+
+                <p:poll interval="1" async="true" update=":form:log :form:logg" immediate="true"
+                        listener="#{principalBean.pegalogs()}"/>
+
+
+
+                <p:dataTable value="#{principalBean.log}" var="tt"
+                             emptyMessage=""
+                             resizableColumns="true"
+                             draggableColumns="true"
+                             reflow="true"
+                             id="log"
+                             scrollable="true"
+                             scrollHeight="200"
+                             multiViewState="true">
+                    <p:column sortBy="#{tt}" headerText="Log Acao">
+                        <h:outputText value="#{tt}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+
+                <p:dataTable value="#{principalBean.logtarefas}" var="ttt"
+                             emptyMessage=""
+                             resizableColumns="true"
+                             draggableColumns="true"
+                             reflow="true"
+                             id="logg"
+                             scrollable="true"
+                             scrollHeight="200"
+                             multiViewState="true">
+                    <p:column sortBy="#{ttt}" headerText="Log Tarefa">
+                        <h:outputText value="#{ttt}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+
+            </p:panel>
+
+
+        </h:form>
+
+    </h:body>
+</html>
+
