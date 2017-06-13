@@ -98,7 +98,7 @@ public class PrincipalBean implements Serializable {
             boolean jaexiste = false;
             for (Tarefa ta : tarefas) {
                 if (ta.getNome().equals(tarefa.getNome())
-                        || ta.getRotina().equals(tarefa.getRotina())) {
+                        || ta.getCron().equals(tarefa.getCron())) {
                     jaexiste = true;
                     break;
                 }
@@ -167,7 +167,7 @@ public class PrincipalBean implements Serializable {
                     Trigger tr = TriggerBuilder.newTrigger()
                             .withIdentity("tr" + t.getNome(), "gtr" + t.getNome())
                             .withSchedule(cronSchedule(t.getNome(),
-                                    t.getRotina())).build();
+                                    t.getCron())).build();
                     agendador.scheduleJob(job, tr);
                     break;
                 }
@@ -178,7 +178,7 @@ public class PrincipalBean implements Serializable {
                     Trigger tr = TriggerBuilder.newTrigger()
                             .withIdentity("tr" + t.getNome(), "gtr" + t.getNome())
                             .withSchedule(cronSchedule(t.getNome(),
-                                    t.getRotina())).build();
+                                    t.getCron())).build();
                     agendador.scheduleJob(job, tr);
                     break;
                 }
@@ -189,7 +189,7 @@ public class PrincipalBean implements Serializable {
                     Trigger tr = TriggerBuilder.newTrigger()
                             .withIdentity("tr" + t.getNome(), "gtr" + t.getNome())
                             .withSchedule(cronSchedule(t.getNome(),
-                                    t.getRotina())).build();
+                                    t.getCron())).build();
                     agendador.scheduleJob(job, tr);
                     break;
                 }

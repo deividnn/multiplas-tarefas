@@ -24,7 +24,7 @@
                                  size="50"/>
 
                     <p:outputLabel value="Comando CRON" for="c"/>
-                    <p:inputText value="#{principalBean.tarefa.rotina}"
+                    <p:inputText value="#{principalBean.tarefa.cron}"
                                  required="true"
                                  size="50"
                                  placeholder="use o site http://www.cronmaker.com/"
@@ -68,8 +68,8 @@
                     <p:column sortBy="#{t.metodo}" headerText="Metodo">
                         <h:outputText value="#{t.metodo}"/>
                     </p:column>
-                    <p:column sortBy="#{t.rotina}" headerText="Rotina">
-                        <h:outputText value="#{t.rotina}"/>
+                    <p:column sortBy="#{t.cron}" headerText="Cron">
+                        <h:outputText value="#{t.cron}"/>
                     </p:column>
                     <p:column sortBy="#{t.status}" headerText="Status">
                         <h:outputText value="#{t.status}"/>

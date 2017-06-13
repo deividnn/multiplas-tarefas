@@ -16,7 +16,7 @@ public class Tarefa implements Serializable {
     private int id;
     private String nome;
     private String metodo;
-    private String rotina;
+    private String cron;
     private String status;
 
     public String getStatus() {
@@ -51,12 +51,12 @@ public class Tarefa implements Serializable {
         this.metodo = metodo;
     }
 
-    public String getRotina() {
-        return rotina;
+    public String getCron() {
+        return cron;
     }
 
-    public void setRotina(String rotina) {
-        this.rotina = rotina;
+    public void setCron(String cron) {
+        this.cron = cron;
     }
 
     @Override
